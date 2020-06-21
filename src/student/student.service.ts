@@ -11,6 +11,14 @@ export class StudentService {
     @InjectRepository(Student) private studentRepository: Repository<Student>,
   ) {}
 
+  async getStudent(id: string): Promise<Student> {
+    return this.studentRepository.findOne({ id });
+  }
+
+  async getStudents(): Promise<Student[]> {
+    return this.studentRepository.find();
+  }
+
   async createStudent(
     createStudentInput: CreateStudentInput,
   ): Promise<Student> {
@@ -23,9 +31,5 @@ export class StudentService {
     });
 
     return this.studentRepository.save(student);
-  }
-
-  async getStudents(): Promise<Student[]> {
-    return this.studentRepository.find();
   }
 }
